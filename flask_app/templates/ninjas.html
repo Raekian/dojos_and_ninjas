@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dojos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div style="display: flex; flex-direction:column; width: 25%;" class="lefCol">
+            <h1>Add Ninja!</h1>
+            <form action="/create_ninja" method="POST">
+                <label for="dojo"> Dojo:</label>
+                <select class="form-control" name="dojos_id" id="inputDojo">
+                    {% for dojos in all_dojos %}
+                    <option value={{dojos.id}}>{{dojos.name}}</option>
+                    {% endfor %}
+                </select>
+                <label for="first_name"> First Name:</label>
+                <input type="text" name="first_name"/>
+                <label for="last_name">Last Name:</label>
+                <input type="text" name="last_name"/>
+                <label for="age">Age:</label>
+                <input type="text" name="age"/>
+                <input class="btn btn-primary" type="submit" value="Create">
+            </form>
+            <a href="/dojos">Home</a>
+        </div>
+    </div>
+</body>
+</html>
