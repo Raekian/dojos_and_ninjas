@@ -31,12 +31,12 @@ class Dojo:
         return dojos
 
 
-    @classmethod
-    def get_dojos_with_ninjas(cls, id):
-        query = f"SELECT * FROM ninjas JOIN dojos on ninjas.dojos_id = dojos.id WHERE ninjas.dojos_id = {id};"
+    # @classmethod
+    # def get_dojos_with_ninjas(cls, id):
+    #     query = f"SELECT * FROM ninjas JOIN dojos on ninjas.dojos_id = dojos.id WHERE ninjas.dojos_id = {id};"
         # query = "SELECT * FROM ninjas JOIN dojos on ninjas.dojos_id = dojos.id WHERE ninjas.dojos_id = %(id)s;"
-        results = connectToMySQL('dojos_and_ninjas').query_db(query)
-        return results
+        # results = connectToMySQL('dojos_and_ninjas').query_db(query)
+        # return results
         # dojo  = results[0]
         # for ninja in results:
         #     ninja_data = {
@@ -49,6 +49,24 @@ class Dojo:
         #     }
         #     dojo.ninjas.append( ninja.Ninja(ninja_data))
         # return dojo
+
+    @classmethod
+    def get_dojos_with_ninjas(cls, data):
+        query = "SELECT * FROM dojos LEFT JOIN ninjas on ninjas.dojos_id = dojos.id WHERE dojos.id = %(id)s;"
+        results = connectToMySQL('dojos_and_ninjas').query_db(query, data)
+        # return results
+        dojo  = cls(results[0])
+        for n in results:
+            ninja_data = {
+                "id" : n["ninjas.id"],
+                "first_name" : n["first_name"],
+                "last_name" : n["last_name"],
+                "age" : n["age"],
+                "created_at" : n["ninjas.created_at"],
+                "updated_at" : n["ninjas.updated_at"]
+            }
+            dojo.ninjas.append( ninja.Ninja(ninja_data))
+        return dojo
 
 
 

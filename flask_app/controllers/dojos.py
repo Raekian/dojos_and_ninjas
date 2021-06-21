@@ -22,6 +22,9 @@ def create_dojo():
 
 @app.route("/dojos/<int:id>")
 def dojosandninjas(id):
-    dojos = Dojo.get_dojos_with_ninjas(id)
+    data = {
+        "id": id
+    }
+    dojos = Dojo.get_dojos_with_ninjas(data)
     print(dojos)
-    return render_template("show.html", all_dojos = dojos)
+    return render_template("show.html", dojo = dojos)

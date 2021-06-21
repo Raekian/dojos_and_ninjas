@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <div style="display: flex; flex-direction:column; width: 25%;" class="lefCol">
-             <h1>{{all_dojos[0]['name']}}</h1>
+             <h1>{{dojo.name}}</h1>
             <table class="table table-dark table-striped">
                 <thead>
                     <tr>
@@ -20,11 +20,11 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {% for dojos in all_dojos%}
+                    {% for ninja in dojo.ninjas%}
                     <tr>
-                      <td>{{dojos['first_name']}}</td>
-                      <td>{{dojos['last_name']}}</td>
-                      <td>{{dojos['age']}}</td>
+                      <td>{{ninja.first_name}}</td>
+                      <td>{{ninja.last_name}}</td>
+                      <td>{{ninja.age}}</td>
                     </tr>
                     {% endfor %}
                   </tbody>
